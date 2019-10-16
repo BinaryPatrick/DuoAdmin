@@ -15,8 +15,6 @@ namespace Unf.Core.Duo.Adapters
             IEnumerable<string> @params = await requestMessage.GetRequestParameters();
             string paramsStr = @params.Aggregate((a, b) => $"{a}\n{b}");
             string signature = GetParamSignature(secret, paramsStr);
-            Console.WriteLine(paramsStr);
-            Console.WriteLine(signature);
             return signature;
         }
 
@@ -40,7 +38,7 @@ namespace Unf.Core.Duo.Adapters
             string content = requestMessage.Method == HttpMethod.Get ? requestMessage.RequestUri.Query : await requestMessage.Content.ReadAsStringAsync();
             return new string[]
             {
-                DateTime.UtcNow.ToString("R"),
+                DateTime.UtcNow.ToString("r"),
                 requestMessage.Method.Method.ToUpperInvariant(),
                 requestMessage.RequestUri.Host.ToLower(),
                 requestMessage.RequestUri.AbsolutePath,

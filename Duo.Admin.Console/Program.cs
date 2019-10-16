@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Unf.Core.Duo;
 using Unf.Core.Duo.Models;
 
@@ -24,7 +25,7 @@ namespace Duo.Admin.Console
             using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "/admin/v1/users?limit=10"))
             {
                 List<User> users = await adapter.MakeRequest<List<User>>(request);
-                System.Console.WriteLine(users[0].Username);
+                System.Console.WriteLine(JsonConvert.SerializeObject(users));
             }
         }
     }
